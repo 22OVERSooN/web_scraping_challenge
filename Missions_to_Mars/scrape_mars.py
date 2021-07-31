@@ -47,9 +47,41 @@ def scrape_all():
     #store a full html link for picture
     featured_image_url =f'https://spaceimages-mars.com/{image_url}'
 
-    mars_facts = pd.read_html("table.html")
+    #connect to Mars Facts
+    #Scraping from that browser
 
-    #connet to Mars Facts
+    url = "https://galaxyfacts-mars.com/"
+    browser.visit(url)
+
+    #start to scrap the table from Mars Facts
+    html = browser.html
+    soup = bs(html, "html.parser")
+    table_content = soup.select_one("table", class_="table table-striped")
+
+    #create the list for table
+    index = []
+    mars_list = []
+    earth_list = []
+
+    categories = table_content.find_all('tr')
+
+    for category in categories:
+        index.append(category.find('th').get_text())
+        mars_list.append(category.find_all('td')[0].get_text())
+        earth_list.append(category.find_all('td')[1].get_text())
+
+    #put the table into panda and do some adjustment
+    df = pd.DataFrame(list(zip(index,mars_list,earth_list)))
+    df = df.set_index(0)
+    df.columns = ['Mars', 'Earth']
+    df.index.name = 'Mars-Earth Comparison'
+    df = df.iloc[1:,:]
+    df.loc['Temperature:','Earth'] = '-88 to 58°C'
+
+    #create the mars_facts html code for table
+    mars_facts = df.to_html()
+
+    #connect to Mars Facts
     url = "https://marshemispheres.com"
     browser.visit(url)
 
