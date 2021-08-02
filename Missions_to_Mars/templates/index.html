@@ -44,18 +44,17 @@
         <hr>
         <div class = "card-deck">
             <div class = "col-md-12">
-                {% for hemisphere_image in mars.hemisphere_image %}
+                {% for hemisphere in mars.hemisphere_image %}
                 <div class = "col-md-3">
                     <div class = "card text-white bg-danger">
-                        <img class = "card-img-top" scr = "{{hemisphere_image.img_url}}" alt = "{{hemisphere_image.title}}">
+                        <img class = "card-img-top" scr = "{{hemisphere.img_url}}" alt = "{{hemisphere.title}}">
                         <div class = "card-body">
-                            <p calss = "card-text">{{hemisphere_image.title}}</p>
+                            <p calss = "card-text">{{hemisphere.title}}</p>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-            {{mars.hemisphere_image}}
 
         </div>
         </div>
