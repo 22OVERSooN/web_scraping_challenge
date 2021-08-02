@@ -15,7 +15,31 @@
                 <h1>Mission to Mars</h1>
                 <p><a class = "btn btn-primary btn-lg" href = "/scrape" role = "button">Scrape New Data</a></p>
             </div>
-
+        <div class = "container">
+            <div class = "row">
+                <div class = "col-md-12">
+                    <h3>Latest Mars News</h3>
+                    <h4>{{mars.first_title}}</h4>
+                    <p>{{mars.first_para</p>
+                </div>
+            </div>
+        </div>
+        <div class = "container">
+            <div class = "row">
+                <div class = "col-md-8">
+                    <h3>Featured Mars Image</h3>
+                    <img src = "{{mars.image_url}}" style = "max-width:100%; max-height:auto;" alt = "Featured Mars Image">
+                </div>
+                <div class = "col-md-4">
+                    <h4>Mars Facts</h4>
+                    {{mars.table}}
+                </div>
+            </div>
+        </div>
+        <div class = "container">
+            <h3 stype = "text-align: center;">Mars Hemispheres</h3>
+            
+        </div>
         </div>
     </body>
 </html>
