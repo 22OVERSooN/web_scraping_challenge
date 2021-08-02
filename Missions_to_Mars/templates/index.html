@@ -36,20 +36,19 @@
                 </div>
                 <div class = "col-md-4">
                     <h4>Mars Facts</h4>
-                    {{mars.table}}
+                        {{mars.table|safe}}
                 </div>
             </div>
         </div>
         <h2 style = "text-align: center;">Mars Hemispheres</h2>
         <hr>
-        <div class = "card-deck">
-            <div class = "col-md-12">
+        <div class = "row">
                 {% for hemisphere in mars.hemisphere_image %}
                 <div class = "col-md-3">
-                    <div class = "card text-white bg-danger">
-                        <img class = "card-img-top" scr = "{{hemisphere.img_url}}" alt = "{{hemisphere.title}}">
-                        <div class = "card-body">
-                            <p class = "card-text">{{hemisphere.title}}</p>
+                    <div class = "thumbnail" style = "border-width: 2px;">
+                        <img class = "card-img-top" src = "{{hemisphere.img_url | default('static/images/error.png', true)}}" alt = "..." style = "max-width:100%; max-height:auto;">
+                        <div class = "caption">
+                            <p>{{hemisphere.title}}</p>
                         </div>
                     </div>
                 </div>

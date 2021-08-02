@@ -50,12 +50,15 @@ def scrape_all():
     #connect to Mars Facts
     #Scraping from that browser
 
-    mars_facts = pd.read_html("https://space-facts.com/mars/")[1]
-    mars_facts.set_index(['Mars - Earth Comparison'])
+    pre_facts = pd.read_html("https://space-facts.com/mars/")[1]
+    pre_facts.columns = ['Mars - Earth Comparison','Mars','Earth']
+    pre_facts.set_index("Mars - Earth Comparison", inplace = True)
+    mars_facts = pre_facts.to_html()
+    print(pre_facts)
 
     #connet to cerberus hemispheres
-    url = "https://marshemispheres.com/cerberus.html"
-    browser.visit(url)
+    url_cerberus = "https://marshemispheres.com/cerberus.html"
+    browser.visit(url_cerberus)
  
     #start to scrap the name of cerberus
     html = browser.html
@@ -69,8 +72,8 @@ def scrape_all():
     cerberus_hem = {"title": cerberus, "img_url": cerberus_link}
 
     #connet to schiaparelli hemispheres
-    url = "https://marshemispheres.com/schiaparelli.html"
-    browser.visit(url)
+    url_schiaparelli = "https://marshemispheres.com/schiaparelli.html"
+    browser.visit(url_schiaparelli)
 
     #start to scrap the name of schiaparelli
     html = browser.html
@@ -84,8 +87,8 @@ def scrape_all():
     schiaparelli_hem = {"title": schiaparelli, "img_url": schiaparelli_link}
 
     #connet to syrtis major hemispheres
-    url = "https://marshemispheres.com/syrtis.html"
-    browser.visit(url)
+    url_syrtis = "https://marshemispheres.com/syrtis.html"
+    browser.visit(url_syrtis)
 
     #start to scrap the name of syrtis major
     html = browser.html
@@ -99,8 +102,8 @@ def scrape_all():
     syrtis_hem = {"title": syrtis, "img_url": syrtis_link}
 
     #connet to syrtis valles hemispheres
-    url = "https://marshemispheres.com/valles.html"
-    browser.visit(url)
+    url_valles = "https://marshemispheres.com/valles.html"
+    browser.visit(url_valles)
 
     #start to scrap the name of valles major
     html = browser.html
@@ -125,6 +128,9 @@ def scrape_all():
     listing['image_url'] = featured_image_url
     listing['table'] = mars_facts
     listing['hemisphere_image'] = hemisphere_image_urls
-
+    
+    browser.quit()
+    
     return listing
+    
 
