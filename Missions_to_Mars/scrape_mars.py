@@ -24,17 +24,17 @@ def scrape_all():
     #start to scrap the page of mars news
     html = browser.html
     soup = bs(html, "html.parser")
-    title_content = soup.select_one("div", class_ ="col-md-12")
+    
 
     #scrape the first title
-    first_title = title_content.find_all("div", class_="content_title")[0].get_text()
+    first_title = soup.find_all("div", class_="content_title")[0].get_text()
 
     #scrape the first subtitle
-    first_para = title_content.find_all("div", class_='artivle_teaser_body')[0].get_text()
+    first_para = soup.find_all("div", class_='article_teaser_body')[0].get_text()
 
     #link to mars space images website
-    url = "https://spaceimages-mars.com/"
-    browser.visit(url)
+    url_img = "https://spaceimages-mars.com/"
+    browser.visit(url_img)
 
     #start to scrap the page of space images
     html = browser.html
@@ -50,8 +50,8 @@ def scrape_all():
     #connect to Mars Facts
     #Scraping from that browser
 
-    url = "https://galaxyfacts-mars.com/"
-    browser.visit(url)
+    url_facts = "https://galaxyfacts-mars.com/"
+    browser.visit(url_facts)
 
     #start to scrap the table from Mars Facts
     html = browser.html
@@ -81,9 +81,9 @@ def scrape_all():
     #create the mars_facts html code for table
     mars_facts = df.to_html()
 
-    #connect to Mars Facts
-    url = "https://marshemispheres.com"
-    browser.visit(url)
+    #connect to Mars Hemisphere
+    url_hemi = "https://marshemispheres.com"
+    browser.visit(url_hemi)
 
     #start to scrap the table from Mars Facts
     html = browser.html
